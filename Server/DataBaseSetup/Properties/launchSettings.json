@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DataBaseSetup": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}

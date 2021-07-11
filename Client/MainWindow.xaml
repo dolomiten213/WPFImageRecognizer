@@ -106,12 +106,12 @@
                   SelectionChanged="ListViewSelectionChanged"
                   ItemsSource="{Binding Path=Recognitions}"
                   Grid.Row="4" Grid.Column="1" 
-                  HorizontalAlignment="Stretch" BorderThickness="6">
+                  HorizontalAlignment="Stretch" BorderThickness="6"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Label" Width="400" DisplayMemberBinding="{Binding Path=Title}"></GridViewColumn>
-                    <GridViewColumn Header="Count" Width="400" DisplayMemberBinding="{Binding Path=Count}">
-                    </GridViewColumn>
+                    <GridViewColumn Header="Count" Width="400" DisplayMemberBinding="{Binding Path=Count}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
