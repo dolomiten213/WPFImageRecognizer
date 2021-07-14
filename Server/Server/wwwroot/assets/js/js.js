@@ -43,8 +43,9 @@ async function RecognitionSelectionChanged()
     });
     if (response.ok === true) {
         paths = await response.json();
-
+        console.log(paths);
         if (!previewBlockIsCreated) {
+            
             let img = document.createElement("img")
             img.id = "img"
             
@@ -58,18 +59,33 @@ async function RecognitionSelectionChanged()
             next.classList.add("next");
             next.onclick = Next;
 
+            /* let name = document.createElement("h3");
+            name.innerHTML = paths[0]; */
+
+            let counter = document.createElement("h3");
+            counter.id = "counter";
+            counter.innerHTML = (index + 1) + "/" + paths.length;
+
+            let label = document.createElement("div");
+            label.classList.add("title")
+            //label.append(name);
+            label.append(counter);
+
             let div = document.createElement("div")
             div.classList.add("pictire");
 
             div.append(prev);
             div.append(img);
             div.append(next);
+            
 
             let previewBlock = document.getElementById("preview_block");
             previewBlock.append(div);
+            previewBlock.append(label);
             
             previewBlockIsCreated = true;
         }
+
         index = 0;
         AddImage(0);
     }
