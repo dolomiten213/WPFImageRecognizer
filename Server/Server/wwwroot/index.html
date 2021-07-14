@@ -2,17 +2,19 @@
 <html>
 <head>
     <title>Image Recognizer</title>
+    <link rel="icon" href="data:;base64,=">
     <link rel='stylesheet' href='/assets/css/reset.css'>
     <link rel='stylesheet' href='/assets/css/styles.css'>
 </head>
 <body>
-    <ol id="ol"></ol>
-    <div id="pictire">
-        <img id="img" />
-        <p id="counter"></p>
-    </div>
-
-    <script src='/assets/js/js.js'>
-    </script>
+    <h1>Your Images Library</h1>
+    <div class="recognitions_list_and_preview_blocks">
+        <ul class="recognitions_list" id="ol">          
+        </ul>
+        <div class="preview_block" id="preview_block">
+            <label><p id="counter"></p></label>
+        </div>
+    </div> 
+    <script src='/assets/js/js.js'></script>
 </body>
 </html>

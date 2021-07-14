@@ -1,9 +1,69 @@
-ol{
-    padding: 0
+body {
+    background-color: #222;
 }
-li {
-    list-style-type: none
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: aliceblue;
 }
-input{
-    margin: 0 10px
+.recognitions_list_and_preview_blocks {
+    display: flex;
+    flex-direction: row;
 }
+.recognitions_list {
+    padding: 10px;
+    background-color: #333;
+    width: 20%;
+    min-width: 200px;
+    
+}
+.recognitions_list_item {
+    color: aliceblue;
+    background-color: #333;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    transition: all linear .1s;
+}
+.recognitions_list_item:hover {
+    transform: translate3d(-5px, -5px, 0);
+    color: gold;
+    /* box-shadow: 5px 5px 10px #222;
+     */cursor: pointer;
+}
+.recognition_class_name {
+    color: inherit;
+}
+.recognition_class_count {
+    color: a=inherit;
+    margin-right: 10px;
+}
+
+
+.preview_block {
+    width: 30%;
+    height: 30%;
+    color: aliceblue;
+}
+.pictire {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.change_img_button {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0,0,0,0.2);
+}
+

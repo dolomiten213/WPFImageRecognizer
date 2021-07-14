@@ -1,12 +1,9 @@
-"use strict";
-
 let buttonCreated = false;
 let index = 0;
 let paths;
-
+let previewBlockIsCreated = false;
 
 GetRecognitions();
-
 
 async function GetRecognitions()
 {
@@ -17,21 +14,27 @@ async function GetRecognitions()
     if (response.ok === true) {
         const recognitions = await response.json();
         recognitions.forEach(rec => {
-            let inp = document.createElement('input')
-            inp.type = "radio"
-            inp.name = "a"
-            inp.value = rec.id
-            inp.onchange = RecognitionSelectionChanged;
+
+            let count = document.createElement('h2');
+            count.innerHTML = rec.count;
+            count.classList.add("recognition_class_count");
+
+            let recognitionClassName = document.createElement('h2');
+            recognitionClassName.innerHTML = rec.title;
+            recognitionClassName.classList.add("recognition_class_name");
+           
             let li = document.createElement('li');
-            li.append(inp)
-            li.append(rec.title)
-            li.append(rec.count)
-            li.append(document.createElement('br'))
+            li.classList.add("recognitions_list_item")
+            li.value = rec.id;
+            li.onclick = RecognitionSelectionChanged;
+            
+            li.append(recognitionClassName)
+            li.append(count)
+                    
             ol.append(li)
         });
     }
 }
-
 async function RecognitionSelectionChanged()
 {
     const response = await fetch("/recognition/" + this.value, {
@@ -40,43 +43,52 @@ async function RecognitionSelectionChanged()
     });
     if (response.ok === true) {
         paths = await response.json();
-        AddImage(0);
-        let counter = document.getElementById("counter");
-        counter.textContent = (1) + "/" + paths.length;
-        if (!buttonCreated)
-        {
-            buttonCreated = true;
-            let inp = document.createElement('input')
-            inp.type = "button"
-            inp.value = "<"
-            inp.onclick = Previous;
-            pictire.append(inp);
-            inp = document.createElement('input')
-            inp.type = "button"
-            inp.value = ">"
-            inp.onclick = Next;
-            pictire.append(inp);
+
+        if (!previewBlockIsCreated) {
+            let img = document.createElement("img")
+            img.id = "img"
+            
+            let prev = document.createElement("button");
+            prev.classList.add("change_img_button");
+            prev.classList.add("prev");
+            prev.onclick = Previous;
+            
+            let next = document.createElement("button");
+            next.classList.add("change_img_button");
+            next.classList.add("next");
+            next.onclick = Next;
+
+            let div = document.createElement("div")
+            div.classList.add("pictire");
+
+            div.append(prev);
+            div.append(img);
+            div.append(next);
+
+            let previewBlock = document.getElementById("preview_block");
+            previewBlock.append(div);
+            
+            previewBlockIsCreated = true;
         }
+        index = 0;
+        AddImage(0);
     }
 }
-
 async function AddImage(ind)
 {
     let img = document.getElementById('img')
     img.src = ("data:image/png;base64," + paths[ind])
 }
-
 async function Next()
 {
-    if (index == paths.length-1)
+    if (index == paths.length - 1)
     {
         index = -1;
     }
-    AddImage(++index)
+    AddImage(++index);
     let counter = document.getElementById("counter");
-    counter.textContent = (index+1) +"/"+ paths.length;
+    counter.textContent = (index + 1) + "/" + paths.length;
 }
-
 async function Previous() {
 
     if (index == 0)
@@ -85,5 +97,5 @@ async function Previous() {
     }
     AddImage(--index)
     let counter = document.getElementById("counter");
-    counter.textContent = (index+1) + "/" + paths.length;
+    counter.textContent = (index + 1) + "/" + paths.length;
 }
